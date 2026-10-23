@@ -1,0 +1,6 @@
+{
+  "name": "Pixel Adventure: The Game",
+  "description": "A vibrant 2D retro arcade platformer featuring responsive physics, handmade pixel art, chiptune audio, and 3 thrilling levels.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
