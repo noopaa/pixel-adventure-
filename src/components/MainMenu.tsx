@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Grid, HelpCircle, Settings, Trophy, Star, Coins } from 'lucide-react';
+import { Play, Grid, HelpCircle, Settings, Trophy, Star, Coins, Download } from 'lucide-react';
 import { GameSaveData } from '../game/storage';
 
 interface MainMenuProps {
@@ -7,6 +7,8 @@ interface MainMenuProps {
   onLevelSelect: () => void;
   onHowToPlay: () => void;
   onSettings: () => void;
+  onOpenInstall?: () => void;
+  isInstalled?: boolean;
   saveData: GameSaveData;
 }
 
@@ -15,6 +17,8 @@ export const MainMenu: React.FC<MainMenuProps> = ({
   onLevelSelect,
   onHowToPlay,
   onSettings,
+  onOpenInstall,
+  isInstalled,
   saveData,
 }) => {
   // Calculate total stars
@@ -142,6 +146,17 @@ export const MainMenu: React.FC<MainMenuProps> = ({
             </span>
           </button>
         </div>
+
+        {/* INSTALL APP (PWA) BUTTON */}
+        {!isInstalled && onOpenInstall && (
+          <button
+            onClick={onOpenInstall}
+            className="group relative w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500/15 via-yellow-500/20 to-amber-500/15 hover:from-amber-500/30 hover:to-yellow-500/30 border border-amber-400/60 hover:border-amber-400 text-amber-300 font-pixel text-xs flex items-center justify-center gap-2 shadow-md transition active:scale-95"
+          >
+            <Download className="w-3.5 h-3.5 text-amber-400 animate-bounce" />
+            <span>INSTALL APP (PWA)</span>
+          </button>
+        )}
       </div>
 
       {/* Footer credit */}

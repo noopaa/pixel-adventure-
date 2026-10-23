@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Volume2, Music, VolumeX, Smartphone, Vibrate, Trash2 } from 'lucide-react';
+import { X, Volume2, Music, VolumeX, Smartphone, Vibrate, Trash2, Download } from 'lucide-react';
 import { GameSettings } from '../game/types';
 import { audio } from '../game/audio';
 
@@ -8,6 +8,8 @@ interface SettingsModalProps {
   onUpdateSettings: (settings: GameSettings) => void;
   onClose: () => void;
   onResetProgress: () => void;
+  onOpenInstall?: () => void;
+  isInstalled?: boolean;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -15,6 +17,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onUpdateSettings,
   onClose,
   onResetProgress,
+  onOpenInstall,
+  isInstalled,
 }) => {
   const handleVolumeChange = (field: 'masterVolume' | 'musicVolume' | 'sfxVolume', value: number) => {
     const updated = { ...settings, [field]: value };
@@ -130,6 +134,22 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             />
           </label>
         </div>
+
+        {/* PWA Install Button if not already installed */}
+        {!isInstalled && onOpenInstall && (
+          <div className="pt-2 border-t border-slate-800">
+            <button
+              onClick={() => {
+                onClose();
+                onOpenInstall();
+              }}
+              className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-yellow-500/20 hover:from-amber-500/30 border border-amber-400/60 text-amber-300 font-pixel text-xs flex items-center justify-center gap-2 transition active:scale-95 shadow"
+            >
+              <Download className="w-4 h-4 text-amber-400" />
+              <span>INSTALL GAME APP (PWA)</span>
+            </button>
+          </div>
+        )}
 
         {/* Reset Progress & Close */}
         <div className="flex items-center justify-between pt-4 border-t border-slate-800">

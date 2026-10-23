@@ -16,12 +16,18 @@ import { GameOverModal } from './components/GameOverModal';
 import { VictoryModal } from './components/VictoryModal';
 import { SettingsModal } from './components/SettingsModal';
 import { HowToPlayModal } from './components/HowToPlayModal';
+import { PWAInstallWidget } from './components/PWAInstallWidget';
+import { usePWA } from './pwa/usePWA';
 
 export default function App() {
   const [gameState, setGameState] = useState<GameState>('MENU');
   const [currentLevelId, setCurrentLevelId] = useState<number>(1);
   const [saveData, setSaveData] = useState<GameSaveData>(StorageManager.loadProgress());
   const [settings, setSettings] = useState<GameSettings>(StorageManager.loadSettings());
+
+  // PWA management hook
+  const pwa = usePWA();
+  const [showPWAInstallModal, setShowPWAInstallModal] = useState<boolean>(false);
 
   // Accumulated score and coins across levels in current session
   const [sessionScore, setSessionScore] = useState<number>(0);
@@ -56,6 +62,30 @@ export default function App() {
   useEffect(() => {
     audio.setVolumes(settings.masterVolume, settings.musicVolume, settings.sfxVolume);
   }, [settings]);
+
+  // Automatic PWA Prompt Trigger
+  useEffect(() => {
+    // Only automatically offer installation when not installed, not in standalone, not dismissed, and user is in MENU
+    if (!pwa.isInstalled && !pwa.isStandalone && !pwa.isDismissed && gameState === 'MENU') {
+      const timer = window.setTimeout(() => {
+        setShowPWAInstallModal(true);
+      }, 1400);
+      return () => clearTimeout(timer);
+    }
+  }, [pwa.isInstalled, pwa.isStandalone, pwa.isDismissed, gameState]);
+
+  // Strict collision prevention: Close install modal if gameplay starts
+  useEffect(() => {
+    if (gameState === 'PLAYING') {
+      setShowPWAInstallModal(false);
+    }
+  }, [gameState]);
+
+  // Open install modal manually (e.g. from Main Menu or Settings)
+  const handleOpenInstallModal = () => {
+    pwa.resetDismissal();
+    setShowPWAInstallModal(true);
+  };
 
   // Handle Play from Main Menu
   const handlePlayFromMenu = () => {
@@ -151,6 +181,8 @@ export default function App() {
             audio.unlock();
             setShowSettingsModal(true);
           }}
+          onOpenInstall={handleOpenInstallModal}
+          isInstalled={pwa.isInstalled || pwa.isStandalone}
           saveData={saveData}
         />
       )}
@@ -246,6 +278,8 @@ export default function App() {
           onUpdateSettings={handleUpdateSettings}
           onClose={() => setShowSettingsModal(false)}
           onResetProgress={handleResetProgress}
+          onOpenInstall={handleOpenInstallModal}
+          isInstalled={pwa.isInstalled || pwa.isStandalone}
         />
       )}
 
@@ -253,6 +287,17 @@ export default function App() {
       {showHowToPlayModal && (
         <HowToPlayModal onClose={() => setShowHowToPlayModal(false)} />
       )}
+
+      {/* 10. PWA INSTALL WIDGET / DIALOG */}
+      <PWAInstallWidget
+        isInstallable={pwa.isInstallable}
+        isIOS={pwa.isIOS}
+        isInstalled={pwa.isInstalled || pwa.isStandalone}
+        onInstall={pwa.install}
+        onDismiss={pwa.dismiss}
+        isOpen={showPWAInstallModal}
+        onClose={() => setShowPWAInstallModal(false)}
+      />
     </main>
   );
 }

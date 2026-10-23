@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background rounded canvas -->
+  <rect width="512" height="512" rx="100" fill="url(#bg)" />
+  <rect x="16" y="16" width="480" height="480" rx="88" fill="none" stroke="url(#gold)" stroke-width="8" stroke-dasharray="16 12" />
+
+  <!-- Stars / Sparkles in background -->
+  <rect x="80" y="80" width="16" height="16" fill="#facc15" />
+  <rect x="72" y="84" width="32" height="8" fill="#facc15" />
+  <rect x="84" y="72" width="8" height="32" fill="#facc15" />
+
+  <rect x="400" y="100" width="12" height="12" fill="#38bdf8" />
+  <rect x="410" y="380" width="16" height="16" fill="#f43f5e" />
+  <rect x="100" y="390" width="14" height="14" fill="#a855f7" />
+
+  <!-- Pixel Art Mascot Container with Shadow -->
+  <g filter="url(#shadow)" transform="translate(136, 116) scale(15)">
+    <!-- 16x16 Pixel Hero -->
+    <!-- Blue Cap & Red Feather -->
+    <rect x="4" y="0" width="5" height="1" fill="#2563eb" />
+    <rect x="9" y="0" width="1" height="1" fill="#ef4444" />
+    <rect x="3" y="1" width="7" height="1" fill="#2563eb" />
+    <rect x="2" y="2" width="9" height="1" fill="#2563eb" />
+
+    <!-- Hair & Face -->
+    <rect x="2" y="3" width="2" height="1" fill="#854d0e" />
+    <rect x="4" y="3" width="5" height="1" fill="#fed7aa" />
+
+    <!-- Eyes -->
+    <rect x="2" y="4" width="1" height="1" fill="#854d0e" />
+    <rect x="3" y="4" width="1" height="1" fill="#fed7aa" />
+    <rect x="4" y="4" width="1" height="1" fill="#ffffff" />
+    <rect x="5" y="4" width="1" height="1" fill="#020617" />
+    <rect x="6" y="4" width="1" height="1" fill="#fed7aa" />
+    <rect x="7" y="4" width="1" height="1" fill="#ffffff" />
+    <rect x="8" y="4" width="1" height="1" fill="#020617" />
+    <rect x="9" y="4" width="1" height="1" fill="#fed7aa" />
+
+    <!-- Cheeks & Mouth -->
+    <rect x="3" y="5" width="4" height="1" fill="#fed7aa" />
+    <rect x="7" y="5" width="1" height="1" fill="#fde047" />
+    <rect x="8" y="5" width="1" height="1" fill="#fed7aa" />
+
+    <!-- Yellow Scarf -->
+    <rect x="3" y="6" width="6" height="1" fill="#facc15" />
+    <rect x="2" y="7" width="2" height="1" fill="#facc15" />
+    <rect x="8" y="7" width="2" height="1" fill="#facc15" />
+
+    <!-- Cyan Tunic Body -->
+    <rect x="4" y="7" width="4" height="1" fill="#06b6d4" />
+    <rect x="3" y="8" width="6" height="1" fill="#06b6d4" />
+    <rect x="3" y="9" width="6" height="1" fill="#06b6d4" />
+    <rect x="3" y="10" width="1" height="1" fill="#0891b2" />
+    <rect x="4" y="10" width="4" height="1" fill="#06b6d4" />
+    <rect x="8" y="10" width="1" height="1" fill="#0891b2" />
+
+    <!-- Slate Pants -->
+    <rect x="4" y="11" width="4" height="1" fill="#1e293b" />
+    <rect x="4" y="12" width="1" height="1" fill="#1e293b" />
+    <rect x="7" y="12" width="1" height="1" fill="#1e293b" />
+    <rect x="4" y="13" width="1" height="1" fill="#1e293b" />
+    <rect x="7" y="13" width="1" height="1" fill="#1e293b" />
+
+    <!-- Boots -->
+    <rect x="3" y="14" width="2" height="1" fill="#7c2d12" />
+    <rect x="7" y="14" width="2" height="1" fill="#7c2d12" />
+    <rect x="2" y="15" width="3" height="1" fill="#7c2d12" />
+    <rect x="7" y="15" width="3" height="1" fill="#7c2d12" />
+  </g>
+
+  <!-- Arcade Banner Label -->
+  <g transform="translate(106, 400)">
+    <rect width="300" height="48" rx="14" fill="#f59e0b" stroke="#fef08a" stroke-width="3" />
+    <text x="150" y="32" font-family="'Press Start 2P', monospace, sans-serif" font-weight="bold" font-size="20" fill="#020617" text-anchor="middle" letter-spacing="2">PIXEL APP</text>
+  </g>
+</svg>
